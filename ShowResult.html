@@ -1,0 +1,56 @@
+<html lang="ko">
+<head>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Festival&Culture</title>
+  <link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+
+<body>
+
+
+  <div class = "container">
+    <header>
+	<div class="wrapper">
+		<div class="logo">
+			<a href="#">Festival&Culture </a>
+		</div>
+		<nav>
+			<a href="#">Developer</a>
+			<a href="#">20172134</a>
+			<a href="#">Taein Kim</a>
+		</nav>
+	</div>
+    </header>
+  </div>
+
+
+  <div class = "content-area">
+    <div class = "wrapper">
+    	<h2>Content Area</h2>
+    </div>
+  </div>
+
+
+
+<button type="button" name="button" class="ac-sub-go-top"></button>
+<script>
+$(window).scroll(function () {
+     var quickHeight=$(document).scrollTop(); //스크롤 높이가 500 이상이면 나타나기
+     if (500 <= quickHeight ) {
+       $('.ac-sub-go-top').css('display','block');
+      }else {
+        $('.ac-sub-go-top').css('display','none');
+      }
+    });
+
+    $('.ac-sub-go-top').click(function(){//위로가기 버튼을 클릭했을때
+      $('html, body').animate({
+        scrollTop: '0'
+      }, 800);
+    });
+</script>
+</body>
+</html>

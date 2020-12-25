@@ -1,0 +1,1547 @@
+<html lang="ko">
+<head>
+<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+-->  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Festival&Culture</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./src/fullpage.js"></script>
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8w3da05u2l"></script>
+
+<!--<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8w3da05u2l"></script>
+-->
+</head>
+
+<body>
+
+<div id = "fullpage">
+<div class="section">
+<form action = "ShowResult.php" method="get">
+  <div class = "container">
+    <header>
+	<div class="wrapper">
+		<div class="logo">
+			<a href="#">Covid-19 Tour Guide</a>
+		</div>
+		<nav>
+			<a href="#">Developer</a>
+			<a href="#">20172134</a>
+			<a href="#">Taein Kim</a>
+		</nav>
+	</div>
+    </header>
+  </div>
+
+  <div class = "search-area">
+  	<h2>For a Safe Life</h2>
+	 	<video loop="" muted="" data-autoplay="" id="video">
+    	 	<source src="tour.mp4" type="video/mp4">
+	 	</video>
+	<div class="boxContainer">
+	<div class="ui-widget">
+	    <label for="tour"></label>
+	 	<input type="text" name="search" class="input txt" id="tour" placeholder="관광지명을 입력하세요">
+		<button class ="search-btn" type = "submit"> 검색 </button>
+	 	</div>
+	<br />
+	<div id="autocomplete"></div>
+	</div>
+  </div>
+ </form>
+</div>
+ <div class = "section">
+ <div class = "covid-header">
+<div class = "covid" id="covid-time"><h2>코로나 정보</h2></div>
+	</div>
+   <div class = "left-right">
+     <div class ="left">
+   	<div id="map"> </div> 
+     </div>
+  <!-- <div class = "district"> </div> -->
+     <div class = "right">
+	<div class = "tour-info">
+		관광지 정보 리스트
+ 		<ul class = "list">	
+		</ul>
+        </div>
+     </div>
+   </div>
+  <div class = "table-area">
+    <table width="100%">
+      <thead class ="thead">
+      </thead>
+      <tbody class="info">
+      </tbody>
+    </table>
+  </div>
+
+ <!--section -->
+ </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+let today = new Date();   
+
+let year = today.getFullYear(); // 년도
+let month = today.getMonth() + 1;  // 월
+let date;  // 날짜
+let hours = today.getHours(); //시
+
+if(hours > 0 && hours <20){
+	date = today.getDate() - 1;
+}else{
+	date = today.getDate();
+}
+var covidTime = "코로나 확진자 현황 " + year + "년도 " + month + "월 " + date + "일 20:00 기준 업데이트";
+document.getElementById("covid-time").innerHTML = covidTime;
+$(function() {
+    $("#tour").autocomplete({
+        source: "ajax_autocomplete.php",
+        minLength: 1,
+        response: function(event, ui) {
+            console.log(ui);
+        },
+        select: function(event, ui) {
+            console.log("Selected:" + JSON.stringify(ui.item.value));
+        },
+        focus: function(event, ui) {
+            return false;
+        }
+	});
+});
+
+$(document).ready(function() {
+    $('#fullpage').fullpage({
+        //options here
+        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
+        autoScrolling:true,
+        scrollHorizontally: true
+    });
+});
+
+
+    var map = new naver.maps.Map('map', {
+        zoom: 7,
+        center: new naver.maps.LatLng(35.849388, 127.512380)
+    });	
+
+
+    var circle1 = new naver.maps.Circle({ 	//경기도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(37.975423,127.253058),
+        radius: 35000,
+
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+    var circle2 = new naver.maps.Circle({	//서울
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(37.545783, 127.031992),
+        radius: 40000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle3 = new naver.maps.Circle({		//부산
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(35.134764,128.975536),
+        radius: 40000,
+
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle4 = new naver.maps.Circle({		//대구
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(35.899478,128.680780),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+
+ var circle5 = new naver.maps.Circle({		//인천
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(37.487334,126.396425),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle6 = new naver.maps.Circle({		//광주
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#000000',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(35.181134,126.966111),
+        radius: 20000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+
+
+ var circle7 = new naver.maps.Circle({		//대전
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(36.391353,127.476510),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle8 = new naver.maps.Circle({		//울산
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(35.605209,129.351247),
+        radius: 20000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle9 = new naver.maps.Circle({		//세종
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(36.871831,127.211495),
+        radius: 20000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle10 = new naver.maps.Circle({		//강원도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(37.862517,128.556201),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle11 = new naver.maps.Circle({		//충청북도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#000000',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(37.107030,127.849494),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle12 = new naver.maps.Circle({		//충청남도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#000000',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(36.572869,126.504788),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle13 = new naver.maps.Circle({		//전라북도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#000000',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(35.868127,127.231126),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+
+
+ var circle14 = new naver.maps.Circle({		//전라남도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(34.682223,126.445896),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle15 = new naver.maps.Circle({		//경상북도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(36.871831,129.154939),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle16 = new naver.maps.Circle({		//경상남도
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(35.301381,128.212663),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+ var circle17 = new naver.maps.Circle({		//제주
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#000000',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(33.406451,126.5438273),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+/*
+ var circle18 = new naver.maps.Circle({		//검역
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(37.722901,124.286513),
+        radius: 30000,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+*/
+
+  naver.maps.Event.addListener(circle1, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle1.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle1, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle1.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+   naver.maps.Event.addListener(circle2, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle2.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle2, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle2.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+
+  naver.maps.Event.addListener(circle3, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle3.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle3, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle3.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle4, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle4.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle4, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle4.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle5, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle5.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle5, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle5.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle6, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle6.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle6, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle6.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle7, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle7.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle7, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle7.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle8, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle8.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle8, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle8.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle9, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle9.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle9, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle9.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle10, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle10.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle10, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle10.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle11, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle11.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle11, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle11.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+  naver.maps.Event.addListener(circle12, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle12.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle12, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle12.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+
+naver.maps.Event.addListener(circle13, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle13.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle13, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle13.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+naver.maps.Event.addListener(circle14, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle14.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle14, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle14.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+naver.maps.Event.addListener(circle15, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle15.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle15, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle15.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+naver.maps.Event.addListener(circle16, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle16.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle16, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle16.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+naver.maps.Event.addListener(circle17, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle17.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle17, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle17.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+/*
+naver.maps.Event.addListener(circle18, "mouseover", function(e) {
+        map.setCursor("pointer");
+
+        circle18.setOptions({
+            fillOpacity: 0.8
+        });
+    });
+
+    naver.maps.Event.addListener(circle18, "mouseout", function(e) {
+
+        map.setCursor("auto");
+
+        circle18.setOptions({
+            fillOpacity: 0.35
+        });
+    });
+*/
+  
+   naver.maps.Event.addListener(circle1, 'click', function() {
+	$.ajax({
+		type: "POST",
+		url: "Search.php",
+		data: {id:"gyeonggido"},
+		success: function(res){
+			console.log(res);
+			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>경기도</td>");
+                        $(".thead").append("</tr>");
+			$(".info").html("");
+			for (var i = 1; i <= 3; i++) {
+				$(".info").append("<tr>");
+				$.each(res, function(key, value){
+					if (i == 1) { 
+						$(".info").append("<td>" +value.district+ "</td>");
+					} else if (i == 2) {
+						$(".info").append("<td>" +value.today+ "</td>");
+					} //else if (i == 3) {
+					//	$(".info").append("<td>" +value.day+ "</td>");
+					//}
+				});
+				$(".info").append("</tr>");
+			}
+		}, error: function(){
+			alert("error");
+		}	
+	});
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"경기도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+ 
+   });
+
+ naver.maps.Event.addListener(circle2, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"seoul"},
+                success: function(res){
+                        console.log(res);
+			$(".thead").html("");
+                        $(".info").html("");
+			$(".thead").append("<tr>");
+				$(".thead").append("<td>서울</td>");
+			$(".thead").append("</tr>");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	   $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"서울"},
+	 success: function(res){
+                        console.log(res);
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+	});
+   });
+ 
+naver.maps.Event.addListener(circle3, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"busan"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>부산</td>");
+                        $(".thead").append("</tr>");
+
+ 
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+	
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"부산"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+
+naver.maps.Event.addListener(circle4, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"daegu"},
+                success: function(res){
+                        console.log(res);
+ 			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>대구</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"대구"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+
+   });
+
+naver.maps.Event.addListener(circle5, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"incheon"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>인천</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"인천"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	
+   });
+
+naver.maps.Event.addListener(circle6, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"gwangju"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			 $(".thead").append("<tr>");
+                                $(".thead").append("<td>광주</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"광주"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle7, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"daejeon"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>대전</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"대전"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+
+   });
+
+naver.maps.Event.addListener(circle8, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"ulsan"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>울산</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"울산"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle9, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"sejong"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>세종</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"세종"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+
+naver.maps.Event.addListener(circle10, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"gangwon"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+			 $(".thead").append("<tr>");
+                                $(".thead").append("<td>강원</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"강원"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle11, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"chungbuk"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>충청북도</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"충청북도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle12, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"chungnam"},
+                success: function(res){
+                        console.log(res);
+			$(".thead").html("");
+			$(".thead").append("<tr>");
+                                $(".thead").append("<td>충청남도</td>");
+                        $(".thead").append("</tr>");
+			
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"충청남도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+
+   });
+
+naver.maps.Event.addListener(circle13, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"jeonbuk"},
+                success: function(res){
+                        console.log(res);
+			$(".thead").html("");
+                        $(".thead").append("<tr>");
+                                $(".thead").append("<td>전라북도</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"전라북도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle14, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"jeonnam"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+                        $(".thead").append("<tr>");
+                                $(".thead").append("<td>전라남도</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"전라남도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle15, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"gyeongbuk"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+                        $(".thead").append("<tr>");
+                                $(".thead").append("<td>경상북도</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"경상북도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle16, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"gyeongnam"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+                        $(".thead").append("<tr>");
+                                $(".thead").append("<td>경상남도</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"경상남도"},
+                success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+        });
+
+
+   });
+
+naver.maps.Event.addListener(circle17, 'click', function() {
+        $.ajax({
+                type: "POST",
+                url: "Search.php",
+                data: {id:"jeju"},
+                success: function(res){
+                        console.log(res);
+			 $(".thead").html("");
+                        $(".thead").append("<tr>");
+                                $(".thead").append("<td>제주도</td>");
+                        $(".thead").append("</tr>");
+
+                        $(".info").html("");
+                        for (var i = 1; i <= 3; i++) {
+                                $(".info").append("<tr>");
+                                $.each(res, function(key, value){
+                                        if (i == 1) {
+                                                $(".info").append("<td>" +value.district+ "</td>");
+                                        } else if (i == 2) {
+                                                $(".info").append("<td>" +value.today+ "</td>");
+                                        } //else if (i == 3) {
+                                        //      $(".info").append("<td>" +value.day+ "</td>");
+                                        //}
+                                });
+                                $(".info").append("</tr>");
+                        }
+                }, error: function(){
+                        alert("error");
+                }
+        });
+	
+	 $.ajax({
+                type: "POST",
+                url: "Search2.php",
+                data: {id:"제주"},
+        	success: function(res){
+                        console.log(res);
+
+                        $(".list").html("");
+                        $(".list").append("<li>");
+                        $.each(res, function(key, value){
+                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        });
+                        $(".list").append("</li>");
+                }, error: function(){
+                        alert("error");
+                }
+
+
+	});
+
+	
+   });
+
+
+
+
+</script>
+
+</body>
+</html>

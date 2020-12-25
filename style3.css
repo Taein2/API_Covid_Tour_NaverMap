@@ -1,0 +1,133 @@
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+
+body {
+	text-align: center;
+}
+.wrapper {
+	max-width: 100%;
+	width:100%;
+	margin: 0 auto;
+}
+header {
+	height: 50px;
+	background: #262626;
+	width: 100%;
+	z-index: 10;
+	position: fixed;
+}
+.logo {
+	max-width:30%;
+	width: 30%;
+	float: left;
+	line-height: 40px;
+	
+}
+.logo a {
+	text-decoration: none;
+	font-size: 30px;
+	font-family: poppins;
+	color: #fff;
+	letter-spacing: 5px;
+}
+nav {
+	max-width:45%;
+	width:45%;
+	float: right;
+	line-height: 40px;
+}
+nav a {
+	text-decoration: none;
+	font-family: poppins;
+	letter-spacing: 4px;
+	font-size: 20px;
+	margin: 0 10px;
+	color: #fff;
+}
+.search-area {
+	max-width: 100%;
+	width:100%;
+	height: 500px;
+	position: fixed;
+	top: 50px;
+	background-image: url(https://post-phinf.pstatic.net/MjAxODA1MjFfMTk0/MDAxNTI2OTEwNjI2NDQ5.4iqn9hN0mmAuPH3Jh6JfOJtLxImfV-wMPPWgN1aYd6og.-uw2k1BCIY6a8Edn7ypxH1Z0OLNrbxa0V7-3KdZh170g.JPEG/%EB%B9%84%ED%96%89%EA%B8%B0.jpg?type=w1200);
+	-webkit-background-size: cover;
+	background-repeat :no-repeat;
+	background-size: 100% 500px;
+	background-position: center center;
+}
+.search-area h2 {
+	padding-top: 8%;
+	font-size: 7rem;
+	font-family: poppins;
+	text-transform: uppercase;
+	color: #fff;
+}
+.content-area {
+	max-width: 100%;
+	width:100%;
+	position: relative;
+	top: 450px;
+	background: #ebebeb;
+	height: 3000px;
+}
+.content-area h2 {
+	font-family: poppins;
+	letter-spacing: 4px;
+	padding-top: 30px;
+	font-size: 4rem;
+	margin: 0;
+}
+.content-area p {
+	padding: 2% 0px;
+	font-family: poppins;
+	line-height: 40px;
+}
+
+
+.ac-sub-go-top{
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  bottom:calc(20%);
+  right: calc((100%-500px)/2 - 2px);
+  display: inline-block;
+  background:#ebebeb url(https://img1.sdmall.co.kr/_assets/image/icon/top.png) no-repeat 50% 50%; //이미지
+  text-indent: -9999px;
+  border: none;
+  background-size: 50%;
+  display: none;
+}
+
+
+.input{
+	height: 50px;
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	outline:none;
+}
+.txt{
+	width:400px;
+}
+.search-btn{
+	height: 50px;
+	width: 150px;
+	background: #ffeb3b;
+	border:none;
+	color: #000;
+	border-radius:10px;
+}
+.search-btn:hover{
+	background: #ffc107;
+	cursor:pointer;
+}
+.boxContainer{
+	padding-top:3%;
+}
+
