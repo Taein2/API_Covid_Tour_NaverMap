@@ -11,14 +11,14 @@
    - http://cspro.sogang.ac.kr/~cse20172134/Project/map.html
     - 공공데이터 api 에서 관광지 api를 받아 리스트로 표현
       1. 공공데이터 API 로부터 다음의 정보를 얻음
-        trrsrtNm, 관광지명
-        rdnmadr	지역
-        latitude	위도
-        longitude경도
-        aceptncCo 수용인원
-        trrsrtIntrcn 관광지 소개
-        phoneNumber 관리기관 전번
-        institutionNm 관리기관명
+        trrsrtNm, 관광지명<br>
+        rdnmadr	지역<br>
+        latitude	위도<br>
+        longitude경도<br>
+        aceptncCo 수용인원<br>
+        trrsrtIntrcn 관광지 소개<br>
+        phoneNumber 관리기관 전번<br>
+        institutionNm 관리기관명<br>
       2. Search2 ->  관광지명 , 주소 JSON을 통한 리스트 구성 완성 
     - naver cloud platform(NCP) 에서  Web Dynamic Map 서비스 이용하여 map 객체 생성(javascript) 전국의 시,도별 좌표를 circle로 표시
       1. click Listener를 통한 시,도별 테이블, 리스트 전환
