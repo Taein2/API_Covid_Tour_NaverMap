@@ -20,6 +20,9 @@ $url_in = array("seoul","busan","gyeongbuk","gyeonggido","gangwon","gyeongnam");
 $url2 = array("city_daejeon","city_incheon","city_daegu","city_ulsan","city_sejong","city_jeonnam");
 $url_in2 = array("daejeon","incheon","daegu","ulsan","sejong","jeonnam");
 
+$url_in3 = array("chungbuk","chungnam","jeonbuk","gwangju","jeju");
+$url3 = array("충북","충남","전북","광주","제주");
+
 if(is_array($url1)){
         foreach(array_keys($url1) as $key){
                 $val1 = $url1[$key];
@@ -45,6 +48,20 @@ if(is_array($url2)){
         }
 }
 
+
+
+if(is_array($url_in3)){
+        foreach(array_keys($url_in3) as $key){
+                $val = $url_in3[$key];
+		$val2 = $url3[$key];
+                echo $val."\n";
+
+                $sql = "truncate table $val;";
+                mysqli_query($conn,$sql);
+                $sql = "INSERT INTO $val(district,today,day) select district,today,day from korea where day = '".$whenToday."' and district = '".$val2."';";
+                mysqli_query($conn,$sql);
+        }
+}
 
 
 

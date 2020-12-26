@@ -1,0 +1,98 @@
+<html lang="ko">
+<head>
+<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+-->  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Festival&Culture</title>
+  <link rel="stylesheet" type="text/css" href="style1.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+<!--<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8w3da05u2l"></script>
+-->
+</head>
+<body>
+<form action = "ShowResult.php" method="get">
+  <header>
+        <nav class="navbar">
+                <div class="navbar_logo">
+                        <i class = "fab fa-accusoft"></i>
+                        <a href="" style="text-decoration:none; color:white;">Covid-19 Tour Guide</a>
+                </div>
+		<ul class="navbar_menu">
+			<li><a href="main.html" style="text-decoration:none; color:white;">검색하기</a></li>
+			<li><a href="map.html" style="text-decoration:none; color:white;">지역별 정보</a></li>
+			
+		</ul>
+                <ul class="navbar_icons">
+                        <li><i class="">DEVELOPER</i></li>
+                        <li><i class="">20172134</i></li>
+                        <li><i class="">김태인</i></li>
+                </ul>
+                <a href="#" class="navbar_toogleBtn">
+                        <i class="fas fa-bars"></i>
+                </a>
+    </header>
+
+
+  <div class = "search-area">
+  	<h2>For a Safe Life</h2>
+	 	<video loop="" muted="" data-autoplay="" id="video">
+    	 	<source src="tour.mp4" type="video/mp4">
+	 	</video>
+	<div class="boxContainer">
+	<div class="ui-widget">
+	    <label for="tour"></label>
+	 	<input type="text" name="search" class="input txt" id="tour" placeholder="관광지명을 입력하세요" required>
+		<button class ="search-btn" type = "submit"> 검색 </button>
+	 	</div>
+	<br />
+	<div id="autocomplete"></div>
+	</div>
+  </div>
+ </form>
+
+<script type="text/javascript">
+
+document.getElementById('video').play();
+
+const toggleBtn = document.querySelector('.navbar_toogleBtn');
+const menu = document.querySelector('.navbar_menu');
+const icons = document.querySelector('.navbar_icons');
+
+toggleBtn.addEventListener('click', ()=>{
+        icons.classList.toggle('active');
+        menu.classList.toggle('active');
+});
+
+$(function() {
+    $("#tour").autocomplete({
+        source: "ajax_autocomplete.php",
+        minLength: 1,
+        response: function(event, ui) {
+            console.log(ui);
+        },
+        select: function(event, ui) {
+            console.log("Selected:" + JSON.stringify(ui.item.value));
+        },
+        focus: function(event, ui) {
+            return false;
+        }
+        });
+});
+
+
+
+//	menu.addEventListener('click',()=>{
+//		location.href="Query.html";
+//	});
+
+
+</script>
+
+</body>
+</html>

@@ -168,30 +168,6 @@ if(is_array($district)){
 
 
 
-$urlJeonbuk = "https://www.jeonbuk.go.kr/board/list.jeonbuk?boardId=BBS_0000105&menuCd=DOM_000000110001000000&contentsSid=1219&cpath=?";
-$html = file_get_html($urlJeonbuk,false, stream_context_create($arrContextOptions));
-
-$district = array();
-$today = array();
-$total = array();
-
-
-
-foreach($html->find('div.city') as $element){
-        foreach($element->find('li') as $val){
-                $val = explode(' ',$val->plaintext);
-                $district[] = $val[0];
-                $total[] = mb_substr($val[1],0,-1,'utf-8');
-        }
-        foreach($element->find('em') as $val){
-                $val = mb_substr($val->plaintext,0,-1,'utf-8');
-                $val = substr($val,1);
-                $val = trim($val);
-                $val = mb_substr($val,0,-1,'utf-8');
-                $today[] = explode(',',$val);
-        }
-}
-echo "전북 수정 요청\n";
 
 
 

@@ -5,57 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Festival&Culture</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style2.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="./src/fullpage.js"></script>
 <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8w3da05u2l"></script>
 
+<script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
 <!--<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=8w3da05u2l"></script>
 -->
 </head>
 
 <body>
+<div>
+  <div class="header">
+        <nav class="navbar">
+                <div class="navbar_logo">
+                        <i class = "fab fa-accusoft"></i>
+                        <a href="main.html" style="text-decoration:none; color:white;">Covid-19 Tour Guide</a>
+                </div>
+  <ul class="navbar_menu">
+                        <li><a href="main.html" style="text-decoration:none; color:white;">검색하기</a></li>
+                        <li><a href="map.html" style="text-decoration:none; color:white;">지역별 정보</a></li>
 
-<div id = "fullpage">
-<div class="section">
-<form action = "ShowResult.php" method="get">
-  <div class = "container">
-    <header>
-	<div class="wrapper">
-		<div class="logo">
-			<a href="#">Covid-19 Tour Guide</a>
-		</div>
-		<nav>
-			<a href="#">Developer</a>
-			<a href="#">20172134</a>
-			<a href="#">Taein Kim</a>
-		</nav>
-	</div>
-    </header>
-  </div>
+                </ul>
 
-  <div class = "search-area">
-  	<h2>For a Safe Life</h2>
-	 	<video loop="" muted="" data-autoplay="" id="video">
-    	 	<source src="tour.mp4" type="video/mp4">
-	 	</video>
-	<div class="boxContainer">
-	<div class="ui-widget">
-	    <label for="tour"></label>
-	 	<input type="text" name="search" class="input txt" id="tour" placeholder="관광지명을 입력하세요">
-		<button class ="search-btn" type = "submit"> 검색 </button>
-	 	</div>
-	<br />
-	<div id="autocomplete"></div>
-	</div>
-  </div>
- </form>
-</div>
- <div class = "section">
+                <ul class="navbar_icons">
+			<li><i class="">DEVELOPER</i></li>
+                        <li><i class="">20172134</i></li>
+                        <li><i class="">김태인</i></li>
+                </ul>
+                <a href="#" class="navbar_toogleBtn">
+                        <i class="fas fa-bars"></i>
+                </a>
+    </div>
+
+
  <div class = "covid-header">
-<div class = "covid" id="covid-time"><h2>코로나 정보</h2></div>
+
+<div class = "covid" id="covid-time"><p>코로나 정보</p></div>
 	</div>
    <div class = "left-right">
      <div class ="left">
@@ -64,28 +52,37 @@
   <!-- <div class = "district"> </div> -->
      <div class = "right">
 	<div class = "tour-info">
-		관광지 정보 리스트
+		<h2>	관광지 정보 리스트</h2>
  		<ul class = "list">	
 		</ul>
         </div>
      </div>
    </div>
   <div class = "table-area">
+      <div class ="thead"></div>
     <table width="100%">
-      <thead class ="thead">
-      </thead>
       <tbody class="info">
       </tbody>
     </table>
   </div>
 
  <!--section -->
- </div>
 
 </div>
-
+</div>
 
 <script type="text/javascript">
+const toggleBtn = document.querySelector('.navbar_toogleBtn');
+const menu = document.querySelector('.navbar_menu');
+const icons = document.querySelector('.navbar_icons');
+
+toggleBtn.addEventListener('click', ()=>{
+        icons.classList.toggle('active');
+        menu.classList.toggle('active');
+});
+
+
+
 
 let today = new Date();   
 
@@ -117,18 +114,10 @@ $(function() {
 	});
 });
 
-$(document).ready(function() {
-    $('#fullpage').fullpage({
-        //options here
-        licenseKey: 'OPEN-SOURCE-GPLV3-LICENSE',
-        autoScrolling:true,
-        scrollHorizontally: true
-    });
-});
 
 
     var map = new naver.maps.Map('map', {
-        zoom: 7,
+        zoom: 5,
         center: new naver.maps.LatLng(35.849388, 127.512380)
     });	
 
@@ -200,7 +189,7 @@ $(document).ready(function() {
         strokeColor: '#0000ff',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#000000',
+        fillColor: '#0000ff',
         fillOpacity: 0.35,
         center: new naver.maps.LatLng(35.181134,126.966111),
         radius: 20000,
@@ -262,7 +251,7 @@ $(document).ready(function() {
         strokeColor: '#0000ff',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#000000',
+        fillColor: '#0000ff',
         fillOpacity: 0.35,
         center: new naver.maps.LatLng(37.107030,127.849494),
         radius: 30000,
@@ -274,7 +263,7 @@ $(document).ready(function() {
         strokeColor: '#0000ff',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#000000',
+        fillColor: '#0000ff',
         fillOpacity: 0.35,
         center: new naver.maps.LatLng(36.572869,126.504788),
         radius: 30000,
@@ -286,7 +275,7 @@ $(document).ready(function() {
         strokeColor: '#0000ff',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#000000',
+        fillColor: '#0000ff',
         fillOpacity: 0.35,
         center: new naver.maps.LatLng(35.868127,127.231126),
         radius: 30000,
@@ -336,7 +325,7 @@ $(document).ready(function() {
         strokeColor: '#0000ff',
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#000000',
+        fillColor: '#0000ff',
         fillOpacity: 0.35,
         center: new naver.maps.LatLng(33.406451,126.5438273),
         radius: 30000,
@@ -660,9 +649,7 @@ naver.maps.Event.addListener(circle18, "mouseover", function(e) {
 		success: function(res){
 			console.log(res);
 			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>경기도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("경기도");
 			$(".info").html("");
 			for (var i = 1; i <= 3; i++) {
 				$(".info").append("<tr>");
@@ -689,11 +676,11 @@ naver.maps.Event.addListener(circle18, "mouseover", function(e) {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");                                     
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -712,9 +699,7 @@ naver.maps.Event.addListener(circle18, "mouseover", function(e) {
                         console.log(res);
 			$(".thead").html("");
                         $(".info").html("");
-			$(".thead").append("<tr>");
-				$(".thead").append("<td>서울</td>");
-			$(".thead").append("</tr>");
+				$(".thead").append("서울");
                         for (var i = 1; i <= 3; i++) {
                                 $(".info").append("<tr>");
                                 $.each(res, function(key, value){
@@ -740,11 +725,11 @@ naver.maps.Event.addListener(circle18, "mouseover", function(e) {
 	 success: function(res){
                         console.log(res);
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+	$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");                  
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -759,10 +744,7 @@ naver.maps.Event.addListener(circle3, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>부산</td>");
-                        $(".thead").append("</tr>");
-
+                                $(".thead").append("부산");
  
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -791,11 +773,11 @@ naver.maps.Event.addListener(circle3, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");                                        
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -813,9 +795,7 @@ naver.maps.Event.addListener(circle4, 'click', function() {
                 success: function(res){
                         console.log(res);
  			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>대구</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("대구");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -844,11 +824,11 @@ naver.maps.Event.addListener(circle4, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");                                     
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -866,9 +846,7 @@ naver.maps.Event.addListener(circle5, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>인천</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("인천");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -897,11 +875,11 @@ naver.maps.Event.addListener(circle5, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+        $(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");                                
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -918,9 +896,7 @@ naver.maps.Event.addListener(circle6, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			 $(".thead").append("<tr>");
-                                $(".thead").append("<td>광주</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("광주");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -949,11 +925,11 @@ naver.maps.Event.addListener(circle6, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");                       
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -970,9 +946,7 @@ naver.maps.Event.addListener(circle7, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>대전</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("대전");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1000,11 +974,11 @@ naver.maps.Event.addListener(circle7, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1022,9 +996,7 @@ naver.maps.Event.addListener(circle8, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>울산</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("울산");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1052,11 +1024,11 @@ naver.maps.Event.addListener(circle8, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1073,9 +1045,7 @@ naver.maps.Event.addListener(circle9, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>세종</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("세종");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1104,11 +1074,11 @@ naver.maps.Event.addListener(circle9, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+           $(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1126,9 +1096,7 @@ naver.maps.Event.addListener(circle10, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-			 $(".thead").append("<tr>");
-                                $(".thead").append("<td>강원</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("강원도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1157,11 +1125,11 @@ naver.maps.Event.addListener(circle10, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1179,9 +1147,7 @@ naver.maps.Event.addListener(circle11, 'click', function() {
                         console.log(res);
 			 $(".thead").html("");
 
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>충청북도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("충청북도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1210,11 +1176,11 @@ naver.maps.Event.addListener(circle11, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1231,9 +1197,7 @@ naver.maps.Event.addListener(circle12, 'click', function() {
                 success: function(res){
                         console.log(res);
 			$(".thead").html("");
-			$(".thead").append("<tr>");
-                                $(".thead").append("<td>충청남도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("충청남도");
 			
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1262,11 +1226,11 @@ naver.maps.Event.addListener(circle12, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1284,9 +1248,7 @@ naver.maps.Event.addListener(circle13, 'click', function() {
                 success: function(res){
                         console.log(res);
 			$(".thead").html("");
-                        $(".thead").append("<tr>");
-                                $(".thead").append("<td>전라북도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("전라북도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1315,11 +1277,11 @@ naver.maps.Event.addListener(circle13, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+$(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1336,9 +1298,7 @@ naver.maps.Event.addListener(circle14, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-                        $(".thead").append("<tr>");
-                                $(".thead").append("<td>전라남도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("전라남도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1367,11 +1327,11 @@ naver.maps.Event.addListener(circle14, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        $(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1388,9 +1348,7 @@ naver.maps.Event.addListener(circle15, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-                        $(".thead").append("<tr>");
-                                $(".thead").append("<td>경상북도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("경상북도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1419,11 +1377,11 @@ naver.maps.Event.addListener(circle15, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        $(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "    " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1440,9 +1398,7 @@ naver.maps.Event.addListener(circle16, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-                        $(".thead").append("<tr>");
-                                $(".thead").append("<td>경상남도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("경상남도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1471,11 +1427,11 @@ naver.maps.Event.addListener(circle16, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                         $(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "     " + value.rdnmadr + "</li><br>");
+                         $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
@@ -1485,6 +1441,8 @@ naver.maps.Event.addListener(circle16, 'click', function() {
    });
 
 naver.maps.Event.addListener(circle17, 'click', function() {
+
+
         $.ajax({
                 type: "POST",
                 url: "Search.php",
@@ -1492,9 +1450,7 @@ naver.maps.Event.addListener(circle17, 'click', function() {
                 success: function(res){
                         console.log(res);
 			 $(".thead").html("");
-                        $(".thead").append("<tr>");
-                                $(".thead").append("<td>제주도</td>");
-                        $(".thead").append("</tr>");
+                                $(".thead").append("제주도");
 
                         $(".info").html("");
                         for (var i = 1; i <= 3; i++) {
@@ -1523,11 +1479,11 @@ naver.maps.Event.addListener(circle17, 'click', function() {
                         console.log(res);
 
                         $(".list").html("");
-                        $(".list").append("<li>");
                         $.each(res, function(key, value){
-                                        $(".list").append("<span>" +value.trrsrtNm + " " + value.rdnmadr + "</span><br>");
+                        $(".list").append("<span>");
+                                        $(".list").append("<li>" +value.trrsrtNm + "     " + value.rdnmadr + "</li><br>");
+                        $(".list").append("</span>");
                         });
-                        $(".list").append("</li>");
                 }, error: function(){
                         alert("error");
                 }
