@@ -9,8 +9,8 @@
      
    ## 네이버 api , 관광지 api , 코로나 Crawling
    *** http://cspro.sogang.ac.kr/~cse20172134/Project/map.html<br>
-    ** 공공데이터 api 에서 관광지 api를 받아 리스트로 표현<br>
-      * 공공데이터 API 로부터 다음의 정보를 얻음<br>
+    ** 공공데이터 api 에서 관광지 api를 받아 리스트로 표현**<br>
+      * 공공데이터 API 로부터 다음의 정보를 얻음*<br>
         trrsrtNm, 관광지명<br>
         rdnmadr	지역<br>
         latitude	위도<br>
