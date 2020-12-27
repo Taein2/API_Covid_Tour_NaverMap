@@ -563,6 +563,9 @@ foreach($html->find('div.data_table.midd.mgt24') as $element){
 
 }
 
+                $sql = "truncate table korea;";
+                mysqli_query($conn,$sql);
+
 if(is_array($district)){
         foreach(array_keys($district) as $key){
                 $val1 = $district[$key];
