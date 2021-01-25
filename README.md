@@ -18,11 +18,16 @@
 ![image](https://user-images.githubusercontent.com/66376774/105651367-fd089d80-5ef9-11eb-9b66-adb0ee2ca7a2.png)
 ![image](https://user-images.githubusercontent.com/66376774/105651371-fe39ca80-5ef9-11eb-84ce-e92b694cc152.png)
 
-##  2-1 단어 자동 완성
+## 2-1 단어 자동 완성
 
+![image](https://user-images.githubusercontent.com/66376774/105651613-b1a2bf00-5efa-11eb-95b7-a4d0579a6e4e.png)
 
+## 2-2 Background video auto play
 
 ![image](https://user-images.githubusercontent.com/66376774/105651521-74d6c800-5efa-11eb-8eb1-be388a51e9b2.png)
 
+## 3-1 관광지 API
+
 ![image](https://user-images.githubusercontent.com/66376774/105651528-7a341280-5efa-11eb-8dd3-8aea0037525e.png)
-  
+
+
