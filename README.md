@@ -35,15 +35,24 @@
 ## 3-2 네이버 Map Api 사용
 
 ![image](https://user-images.githubusercontent.com/66376774/105651707-ef9fe300-5efa-11eb-875b-e820c39668f8.png)
-
-
 ![image](https://user-images.githubusercontent.com/66376774/105651713-f3336a00-5efa-11eb-9e0f-baba6ceb2dee.png)
+
+## 3-3 각 시, 도별 홈페이지 크롤링
 ![image](https://user-images.githubusercontent.com/66376774/105651719-f75f8780-5efa-11eb-8354-2e993cedbf57.png)
 ![image](https://user-images.githubusercontent.com/66376774/105651730-fdedff00-5efa-11eb-811a-43c9e23ea197.png)
 ![image](https://user-images.githubusercontent.com/66376774/105651738-01818600-5efb-11eb-99bf-929aa4d2a7d1.png)
 ![image](https://user-images.githubusercontent.com/66376774/105651744-05150d00-5efb-11eb-83ba-325b88fd0665.png)
 ![image](https://user-images.githubusercontent.com/66376774/105651754-09d9c100-5efb-11eb-86d5-e694c9e250a9.png)
+
+## 4-1 검색 결과 리스트
+
 ![image](https://user-images.githubusercontent.com/66376774/105651763-0e05de80-5efb-11eb-8ee5-8820c58d3be6.png)
+
+## 4-2 맵 마커 클릭 이벤트
+
 ![image](https://user-images.githubusercontent.com/66376774/105651770-11996580-5efb-11eb-8d68-65e5fed72292.png)
+
+## 4-3 여행 위험도 측정
+
 ![image](https://user-images.githubusercontent.com/66376774/105651775-152cec80-5efb-11eb-8a3c-d81bf7774926.png)
 
