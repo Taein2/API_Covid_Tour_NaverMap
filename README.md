@@ -20,9 +20,9 @@
 
 ##  2-1 단어 자동 완성
 
-![image](https://user-images.githubusercontent.com/66376774/105651379-098cf600-5efa-11eb-960a-f3900ca3e2d9.png)
 
-![image](https://user-images.githubusercontent.com/66376774/105651513-70121400-5efa-11eb-9fdc-6b820c879162.png)
+
 ![image](https://user-images.githubusercontent.com/66376774/105651521-74d6c800-5efa-11eb-8eb1-be388a51e9b2.png)
+
 ![image](https://user-images.githubusercontent.com/66376774/105651528-7a341280-5efa-11eb-8dd3-8aea0037525e.png)
   
