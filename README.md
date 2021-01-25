@@ -29,5 +29,21 @@
 ## 3-1 관광지 API
 
 ![image](https://user-images.githubusercontent.com/66376774/105651528-7a341280-5efa-11eb-8dd3-8aea0037525e.png)
+![image](https://user-images.githubusercontent.com/66376774/105651613-b1a2bf00-5efa-11eb-95b7-a4d0579a6e4e.png)
+![image](https://user-images.githubusercontent.com/66376774/105651700-e9aa0200-5efa-11eb-8823-c9d8f45c88ee.png)
 
+## 3-2 네이버 Map Api 사용
+
+![image](https://user-images.githubusercontent.com/66376774/105651707-ef9fe300-5efa-11eb-875b-e820c39668f8.png)
+
+
+![image](https://user-images.githubusercontent.com/66376774/105651713-f3336a00-5efa-11eb-9e0f-baba6ceb2dee.png)
+![image](https://user-images.githubusercontent.com/66376774/105651719-f75f8780-5efa-11eb-8354-2e993cedbf57.png)
+![image](https://user-images.githubusercontent.com/66376774/105651730-fdedff00-5efa-11eb-811a-43c9e23ea197.png)
+![image](https://user-images.githubusercontent.com/66376774/105651738-01818600-5efb-11eb-99bf-929aa4d2a7d1.png)
+![image](https://user-images.githubusercontent.com/66376774/105651744-05150d00-5efb-11eb-83ba-325b88fd0665.png)
+![image](https://user-images.githubusercontent.com/66376774/105651754-09d9c100-5efb-11eb-86d5-e694c9e250a9.png)
+![image](https://user-images.githubusercontent.com/66376774/105651763-0e05de80-5efb-11eb-8ee5-8820c58d3be6.png)
+![image](https://user-images.githubusercontent.com/66376774/105651770-11996580-5efb-11eb-8d68-65e5fed72292.png)
+![image](https://user-images.githubusercontent.com/66376774/105651775-152cec80-5efb-11eb-8a3c-d81bf7774926.png)
 
